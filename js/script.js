@@ -27,8 +27,9 @@ function showPage(list, page){
    const listStudents = document.querySelector('.student-list');
    listStudents.innerHTML = '';
 
+   //looping through the list of objs (data)
    for(let i = 0; i < list.length; i++){
-      //9 & 18
+      //ex index9 & index18 = "show me list of students between those pgs"
       if(i >= startIndex && i < endIndex){
         let html = `<li class="student-item cf">
             <div class="student-details">
@@ -40,6 +41,7 @@ function showPage(list, page){
                <span class="date">${list[i].registered.date}</span>
             </div>
          </li>`
+         //add my student obj inside the ul elm after the last child
          listStudents.insertAdjacentHTML('beforeend', html);
       }
    }
@@ -70,17 +72,23 @@ function addPagination(list){
    //iterating through numOfpages 
    for(let i = 1; i <= numOfPages; i++){
       console.log(numOfPages, 'secnumofpages');
+      //creating a ternary statement; if index is 1; set class to active otherwise leave it empty
       let button = `<li> <button type="button" class="${i === 1 ? "active" : ''}">${i}</button> </li>`
+      //add my button after the last one 
       linkList.insertAdjacentHTML('beforeend', button);
       console.log(button, 'button');
    
      
-      console.log(button);
+
       linkList.addEventListener('click', (e) => {
+         //grabbing current button
       let activeButton = linkList.querySelector('button.active');
       if(e.target.tagName === "BUTTON"){
+         //removing className active from prev button
          activeButton.classList.remove('active'); 
+         //WHILE grabbing current button and setting className to active
          e.target.classList.add('active')
+         //show me current list based on the current button chosen
           showPage(list, e.target.textContent);
           console.log(e.target.textContent, "textcontent");
       }
